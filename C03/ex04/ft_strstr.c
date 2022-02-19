@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aradice <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 16:58:06 by aradice           #+#    #+#             */
-/*   Updated: 2022/02/08 21:17:51 by aradice          ###   ########.fr       */
+/*   Created: 2022/02/10 14:27:58 by aradice           #+#    #+#             */
+/*   Updated: 2022/02/10 14:28:00 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
+char	*ft_strstr(char *str, char *to_find)
 {
-	write(1, &c, 1);
-}
+	int	i;
+	int	y;
 
-void	ft_putstr_non_printable(char *str)
-{
-	char	*hex;
-
-	hex = "0123456789abcdef";
-	while (*str)
-	{
-		if (*str < 32 || *str > 126)
-		{
-			write(1, "\\", 1);
-			ft_putchar(hex[(unsigned char)(*str) / 16]);
-			ft_putchar(hex[(unsigned char)(*str) % 16]);
+	i = 0;
+	if (to_find[i] == 0)
+		return (str);
+	while (str[i])
+	{	
+		y = 0;
+		while (str[i + y] == to_find[y])
+		{	
+			if (to_find[y + 1] == '\0')
+				return (str + i);
+			y++;
 		}
-		else
-			ft_putchar(*str);
-		str++;
+		i++;
 	}
+	return (0);
 }

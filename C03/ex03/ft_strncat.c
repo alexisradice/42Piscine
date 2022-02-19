@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aradice <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 16:58:06 by aradice           #+#    #+#             */
-/*   Updated: 2022/02/08 21:17:51 by aradice          ###   ########.fr       */
+/*   Created: 2022/02/09 15:22:54 by aradice           #+#    #+#             */
+/*   Updated: 2022/02/09 15:24:49 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	write(1, &c, 1);
-}
+	unsigned int	i;
+	unsigned int	y;
 
-void	ft_putstr_non_printable(char *str)
-{
-	char	*hex;
-
-	hex = "0123456789abcdef";
-	while (*str)
+	i = 0;
+	y = 0;
+	while (dest[i])
 	{
-		if (*str < 32 || *str > 126)
-		{
-			write(1, "\\", 1);
-			ft_putchar(hex[(unsigned char)(*str) / 16]);
-			ft_putchar(hex[(unsigned char)(*str) % 16]);
-		}
-		else
-			ft_putchar(*str);
-		str++;
+		i++;
 	}
+	while (src[y] && y < nb)
+	{
+		dest[i] = src[y];
+		y++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

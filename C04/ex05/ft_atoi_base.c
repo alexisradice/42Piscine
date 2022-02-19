@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aradice <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 16:58:06 by aradice           #+#    #+#             */
-/*   Updated: 2022/02/08 21:17:51 by aradice          ###   ########.fr       */
+/*   Created: 2022/02/15 14:37:09 by aradice           #+#    #+#             */
+/*   Updated: 2022/02/15 14:37:11 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
+int ft_atoi_base(char *str, char *base)
 {
-	write(1, &c, 1);
-}
+	int	val;
+	int	compteur;
 
-void	ft_putstr_non_printable(char *str)
-{
-	char	*hex;
-
-	hex = "0123456789abcdef";
-	while (*str)
+	val = 0;
+	compteur = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	while (*str == '-' || *str == '+')
 	{
-		if (*str < 32 || *str > 126)
-		{
-			write(1, "\\", 1);
-			ft_putchar(hex[(unsigned char)(*str) / 16]);
-			ft_putchar(hex[(unsigned char)(*str) % 16]);
-		}
-		else
-			ft_putchar(*str);
+		if (*str == '-')
+			compteur++;
 		str++;
 	}
+	while (*str >= '0' && *str <= '9')
+	{
+		val *= 10;
+		val += *str - '0';
+		str++;
+	}
+	if (compteur % 2 != 0)
+		return (-val);
+	else
+		return (val);
 }

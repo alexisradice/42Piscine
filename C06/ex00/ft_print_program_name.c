@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_print_program_name.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aradice <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 16:58:06 by aradice           #+#    #+#             */
-/*   Updated: 2022/02/08 21:17:51 by aradice          ###   ########.fr       */
+/*   Created: 2022/02/10 22:33:42 by aradice           #+#    #+#             */
+/*   Updated: 2022/02/10 22:41:37 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	main(int argc, char **argv)
 {
-	write(1, &c, 1);
-}
+	int	i;
 
-void	ft_putstr_non_printable(char *str)
-{
-	char	*hex;
-
-	hex = "0123456789abcdef";
-	while (*str)
+	i = 0;
+	if (argc == 1)
 	{
-		if (*str < 32 || *str > 126)
+		while (argv[0][i] != '\0')
 		{
-			write(1, "\\", 1);
-			ft_putchar(hex[(unsigned char)(*str) / 16]);
-			ft_putchar(hex[(unsigned char)(*str) % 16]);
+			write (1, &argv[0][i], 1);
+			i++;
 		}
-		else
-			ft_putchar(*str);
-		str++;
-	}
+	}	
 }

@@ -1,37 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_print_comb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aradice <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 16:58:06 by aradice           #+#    #+#             */
-/*   Updated: 2022/02/08 21:17:51 by aradice          ###   ########.fr       */
+/*   Created: 2022/02/02 13:40:33 by aradice           #+#    #+#             */
+/*   Updated: 2022/02/03 12:14:41 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+void	ft_display_nb(char a, char b, char c)
 {
+	write(1, &a, 1);
+	write(1, &b, 1);
 	write(1, &c, 1);
+	if (!(c == '9' && a == '7' && b == '8'))
+	{
+		write(1, ", ", 2);
+	}
 }
 
-void	ft_putstr_non_printable(char *str)
+void	ft_print_comb(void)
 {
-	char	*hex;
+	char	a;
+	char	b;
+	char	c;
 
-	hex = "0123456789abcdef";
-	while (*str)
+	a = '0';
+	b = '0';
+	c = '0';
+	while (a <= '7')
 	{
-		if (*str < 32 || *str > 126)
+		b = a + 1;
+		while (b <= '8')
 		{
-			write(1, "\\", 1);
-			ft_putchar(hex[(unsigned char)(*str) / 16]);
-			ft_putchar(hex[(unsigned char)(*str) % 16]);
+			c = b + 1;
+			while (c <= '9')
+			{
+				ft_display_nb (a, b, c);
+				c++;
+			}
+			b++;
 		}
-		else
-			ft_putchar(*str);
-		str++;
+		a++;
 	}
 }
